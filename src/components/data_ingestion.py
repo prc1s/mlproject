@@ -10,6 +10,8 @@ from src.entity.artifact_entity import DataIngestionArtifact
 class DataIngestion:
     def __init__(self):
         self.data_ingestion_config = DataIngestionConfig()
+        os.makedirs(self.data_ingestion_config.ingested_data_dir, exist_ok=True)
+        logger.info(f"Created {self.data_ingestion_config.ingested_data_dir}")
     
     def initiate_data_ingestion(self):
         logger.info("Entered Data Ingestion Method")
@@ -18,10 +20,12 @@ class DataIngestion:
             logger.info("Read Dataset as Dataframe")
             os.makedirs(os.path.dirname(self.data_ingestion_config.train_data_path), exist_ok=True)
             df.to_csv(self.data_ingestion_config.raw_data_path, index=False, header=True)
-            logger.info("Train, Test Split Iinitiated")
             train_set, test_set = train_test_split(df, test_size=0.2, random_state=42)
             train_set.to_csv(self.data_ingestion_config.train_data_path, index=False, header=True)
             test_set.to_csv(self.data_ingestion_config.test_data_path, index=False, header=True)
+            logger.info("Train, Test Split Completed"+
+                        f"\nTrain set at {self.data_ingestion_config.train_data_path}\nTest set at {self.data_ingestion_config.test_data_path}")
+            logger.info("Exiting Data Ingestion Method")
             return DataIngestionArtifact(
                 train_file_path=self.data_ingestion_config.train_data_path,
                 test_file_path=self.data_ingestion_config.test_data_path
