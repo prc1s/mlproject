@@ -12,3 +12,7 @@ class DataTransformationArtifact:
     train_array: str
     preprocessor_path: str
 
+
+@dataclass
+class DataValidationArtifacts:
+    validation:bool
