@@ -15,4 +15,18 @@ def save_object(obj:object, file_path:str):
     except Exception as e:
         logger.exception(CustomException(e,sys))
         raise CustomException(e,sys)
+    
+def load_object(file_path:str):
+    try:
+        logger.info(f"Entered laod object function at {os.getcwd()}")
+        if not os.path.exists(os.path.dirname(file_path)):
+            logger.exception(f"The file path {file_path} does not exist")
+            raise Exception(f"The file path {file_path} does not exist")
+        with open(file_path, "rb") as file:
+            logger.info(f"Exiting load object Function at {os.getcwd()}")
+            return pickle.load(file)
+    except Exception as e:
+        logger.exception(CustomException(e,sys))
+        raise CustomException(e,sys)
+
 

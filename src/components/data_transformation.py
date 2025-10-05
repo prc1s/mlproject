@@ -83,6 +83,7 @@ class DataTransformation:
                 preprocessor_path=self.data_transformation_config.preprocessor_object_file_path
             )
         except Exception as e:
+            logger.exception(CustomException(e,sys))
             raise CustomException(e,sys)
 
 

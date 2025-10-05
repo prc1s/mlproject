@@ -12,7 +12,11 @@ class DataTransformationArtifact:
     train_array: str
     preprocessor_path: str
 
-
 @dataclass
-class DataValidationArtifacts:
-    validation:bool
+class TestMetricsArtifacts:
+    r2_score: float
+    mean_absolute_error: float
+    mean_squared_error: float
+@dataclass
+class ModelTrainerArtifact:
+    s:float
